@@ -12,66 +12,126 @@ const url = "mongodb://127.0.0.1:27017/";
 const mongoose = require("mongoose");
 const connection = require("../database/sqlDataBase");
 const mysql = require("mysql");
+const bcrypt = require("bcrypt");
+const fs = require("fs");
 
 
 const user = {
+
     saveDataForm: (req, res) => {
-        let nombre = 'Javier';
-        let email = 'javier@gmail.com';
-        let urlImg = 'https://s0.wklcdn.com/image_45/1359708/photo.jpg?1614632131798';
-        let contrasena = 'Javier123*';
-        let about = 'Me encantan las motos';
-        let longitud = '42.32343435';
-        let latitud = '-5.32343435';
+        let nombre = req.body.username;
+        let email = req.body.email;
+        let urlImg = req.body.urlImg;
+        let contrasena = req.body.password;
+        let about = req.body.about;
+        let longitud = req.body.longitud;
+        let latitud = req.body.latitud;
 
 
-        let insertQuery = `INSERT INTO Usuarios
-       (
-           nombre, email, urlImg ,contrasena, about, longitud, latitud
-       )
-       VALUES
-       (
-           ?, ?, ?, ?, ?, ?, ?
-       )`;
+        const nameExp = new RegExp(/^([A-Za-z]{1,15})$/);
+        const passExp = new RegExp(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/
+        );
+        /**
+* Aqui comprobamos si los datos que introduce el usuario son correctos o no
+* si lo son se introducen en la base de datos, y si no lo son le indicamos a el usuario que son
+* incorrectos
+*/
 
-        let query = mysql.format(insertQuery, [
-            nombre,
+        if (
+            !nameExp.test(nombre) ||
+            !passExp.test(contrasena)
+
+
+        ) {
+            console.log("campos incorrectos");
+        } else {
+            // Aqui introducimos los datos en la base de datos
+            let selectQuery = 'SELECT * FROM ?? WHERE ?? = ?';
+            let query3 = mysql.format(selectQuery, [
+                "Usuarios",
+                "email",
+                email,
+            ]);
+            console.log(email);
+            // Aqui comprobamos si el email ya existe en la base de datos
+            if (connection) {
+                connection.query(query3, (err, result) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        if (result.length > 0) {
+                            console.log("ya existe");
+
+                        } else {
+                            bcrypt.hash(contrasena, 10, (err, palabraSecretaEncriptada) => {
+                                if (err) {
+                                    console.log("Error hasheando:", err);
+                                } else {
+
+                                    console.log("Y hasheada es: " + palabraSecretaEncriptada);
+                                    palabraEncriptada = palabraSecretaEncriptada;
+                                    // Aqui introducimos los datos en la base de datos cuando no existe el email
+                                    let query = "INSERT INTO Usuarios (nombre, email, contrasena, about, urlImg, longitud, latitud) VALUES (?,?,?,?,?,?,?)";
+                                    let query2 = mysql.format(query, [
+                                        nombre,
+                                        email,
+                                        palabraEncriptada,
+                                        about,
+                                        urlImg,
+                                        longitud,
+                                        latitud
+                                    ]);
+                                    connection.query(query2, (err, result) => {
+                                        if (err) {
+                                            console.log(err);
+                                        } else {
+                                            console.log("insertado");
+
+                                        }
+
+                                    }
+                                    );
+                                }
+                            })
+                        }
+                    }
+                }
+                );
+            }
+        }
+        res.json({
+            message: true,
             email,
-            urlImg,
-            contrasena,
+            nombre,
             about,
+            urlImg,
             longitud,
             latitud
-        ]);
-
-        connection.query(query, (err, data) => {
-            if (err) throw err;
-            console.log(data);
-
-        });
-
-        res.send("ok");
+        })
     },
-    login: (req, res) => {
-        loginEmail = 'Javi';
-        passLog = 'Javier123*';
 
-        if (loginEmail == "admin@admin.com" && passLog == "Admin123*") {
-            res.render("admin");
-        }
+    login: (req, res) => {
+        loginEmail = req.body.email;
+        passLog = req.body.password;
+
+        // if (loginEmail == "admin@admin.com" && passLog == "Admin123*") {
+        //     res.render("admin");
+        // }
+        console.log(loginEmail);
 
         let nameCorrect = `SELECT email,contrasena FROM Usuarios where email = '${loginEmail}'`;
-
+        // Aqui comprobamos si el email existe en la base de datos
         connection.query(nameCorrect, (err, rows) => {
             if (err) throw err;
 
             console.log('Usuario: \n', rows);
-            then(function (result) {
-                // result == true
+            bcrypt.compare(passLog, rows[0].contrasena).then(function (result) {
+
                 if (result && rows[0].email == loginEmail) {
                     console.log("Usuario correcto");
                     let selectQuery = "SELECT * FROM ?? WHERE ?? = ?";
-                    
+
                     let query3 = mysql.format(selectQuery, [
                         "Usuarios",
                         "email",
@@ -82,11 +142,13 @@ const user = {
                     connection.query(query3, (err, data) => {
                         if (err) throw err;
                         console.log(data);
-                        logNombre = data[0].nombre;
-                        logApellido = data[0].apellido;
-                        logDni = data[0].dni;
-                        logEmail = data[0].email;
-                        logTelefono = data[0].telefono;
+                        nombre = data[0].nombre;
+                        email = data[0].email;
+                        urlImg = data[0].urlImg;
+                        contrasena = data[0].contrasena;
+                        about = data[0].about;
+                        longitud = data[0].longitud;
+                        latitud = data[0].latitud;
                     });
 
                 } else {
@@ -95,11 +157,42 @@ const user = {
 
             });
         })
-        res.send("ok-Login");
+        res.json({
+            message: true,
+            email,
+            nombre,
+            about,
+            urlImg,
+            longitud,
+            latitud
+        })
+
     },
+    regRute: (req, res) => {
+        //Aqui me traigo del front las posiciones de la ruta
+
+        var posiciones = req.body.posiciones;
+
+        console.log(posiciones);
+
+        //Aqui añado la ruta al array de rutas
+
+        rutas.push(posiciones);
+
+        //Aqui guardo el array de rutas en un json
+
+        let json_rutas = JSON.stringify(rutas);
+        fs.writeFileSync('ruta.json', json_rutas);
 
 
-    
+    }
+
+
+
+
+
+
+
 
 
 }

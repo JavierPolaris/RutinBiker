@@ -8,7 +8,7 @@ const user = require("../controllers/user.controllers")
 
 router.post("/registro",user.saveDataForm);
 router.post("/login", user.login); 
-
+router.post("/RegRute", user.regRute); 
 
 
 module.exports = router;

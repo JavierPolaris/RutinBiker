@@ -6,7 +6,7 @@ require("./database/mongo")
 require("./database/sqlDataBase")
 
 const router = require("./routes/routes")
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5001;
  
 
 
@@ -21,3 +21,4 @@ app.use("/", router);
 app.listen(PORT, ()=>{
     console.log(`Se inicia el server en : http://localhost:${PORT}`);
 })
+ 
