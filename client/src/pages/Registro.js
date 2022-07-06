@@ -14,9 +14,11 @@ const Registro = () => {
     const [about, setAboutSend] = useState("");
     const [latitude, setLatitudeSend] = useState("");
     const [longitude, setLongitudeSend] = useState("");
-    
+    const [bike, setBikeSend] = useState("");
+    const [anio, setAnioSend] = useState("");
 
-    navigator.geolocation.watchPosition(function(position, error) {
+
+    navigator.geolocation.watchPosition(function (position, error) {
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
         setLatitudeSend(latitude)
@@ -27,15 +29,17 @@ const Registro = () => {
         const requestOptions = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ 
-                email: emailSend, 
-                password: passSend, 
+            body: JSON.stringify({
+                email: emailSend,
+                password: passSend,
                 passConfSend: passConfSend,
                 username: username,
                 urlImg: urlImg,
                 about: about,
                 latitud: latitude,
-                longitud: longitude 
+                longitud: longitude,
+                bike: bike,
+                anio: anio
             }),
 
         };
@@ -43,44 +47,50 @@ const Registro = () => {
         fetch("registro", requestOptions)
             .then((response) => response.json())
             .then((res) => {
-                setInterval(() => { 
-                    if (res.message === true){
+                setInterval(() => {
+                    if (res.message === true) {
                         localStorage.setItem('user', JSON.stringify({
                             logNombre: res.nombre,
                             logEmail: res.email,
                             logUrlImg: res.urlImg,
                             logAbout: res.about,
-                            logLong: res.longitud,
-                            logLat: res.latitud,
-                            
+                            latitude,
+                            longitude,
+                            logBike: res.bike,
+                            logAnio: res.anio,
+
+
                         }));
                         window.location.assign("/UPage");
-                    }else{
+                    } else {
                         alert("Usuario o contraseña incorrectos")
                     }
                 }
-                , 1000);
+                    , 2000);
 
             });
-          
+
 
     };
- 
+
     return (
         <div className="container-Log">
-            
+
             <div className="registro">
                 <div className="register-Text">
                     <h1>Welcome to our community  </h1>
                     <p className="paReg">Already have an ccount? <Link to={"/home"} className="buttonHome" >Log in</Link></p>
                 </div>
                 <div className='boinputsReg'>
-                    <input type="text" onChange={(e)=>setUserSend(e.target.value)} placeholder="Username" className="buttonGoogle" required />
-                    <input type="text" onChange={(e)=>setAboutSend(e.target.value)} placeholder="About U" className="buttonGoogle" required />
+                    <input type="text" onChange={(e) => setUserSend(e.target.value)} placeholder="Username" className="buttonGoogle" required />
+                    <input type="text" onChange={(e) => setUrlImgSend(e.target.value)} placeholder="Añade URL para imagen de usuario" className="buttonGoogle" required />
+                    <input type="text" onChange={(e) => setAboutSend(e.target.value)} placeholder="Cuentanos que te motiva" className="buttonGoogle" required />
                     <input type="text" onChange={(e) => setEmailSend(e.target.value)} placeholder="Email" className="buttonGoogle" required />
+                    <input type="text" onChange={(e) => setBikeSend(e.target.value)} placeholder="Introduce el modelo de moto" className="buttonGoogle" required />
+                    <input type="text" onChange={(e) => setAnioSend(e.target.value)} placeholder="Año del modelo" className="buttonGoogle" required />
                     <input type="password" onChange={(e) => setPassSend(e.target.value)} placeholder="Password" className="buttonGoogle" required />
                     <input type="password" onChange={(e) => setPassConfSend(e.target.value)} placeholder="Confirm Password" className="buttonGoogle" required />
-                    
+
 
                     <div className='listaReg'>
                         <ul style={{
@@ -88,7 +98,7 @@ const Registro = () => {
                             display: 'grid',
                             gridTemplateColumns: 'repeat(3, 1fr)',
                             gridGap: '0px',
-                            
+
                             justifyContent: 'flex-start',
                             justifyItems: 'left',
                             color: 'grey',
@@ -102,15 +112,6 @@ const Registro = () => {
                             <li className='liStile'> One number</li>
 
                         </ul>
-                        <input type="file" onChange={(e)=>setUrlImgSend(e.target.value)} placeholder="Imagen" accept="image/png, .jpeg, .jpg, image/gif" style={{
-                            width: '84%',
-                            display: 'flex',
-                            border: '1px solid #ccc',
-                            borderRadius: '5px',
-                            marginLeft: '42px',
-                            fontFamily: 'poppins',
-                            color: 'grey',
-                        }} required />
                     </div>
                 </div>
                 <div className="login-Text">

@@ -4,9 +4,21 @@ import React, { useState, useEffect } from "react";
 import '../App.css';
 
 const Login = () => {
-
     const [emailSend, setDataToSend] = useState("");
     const [passSend, setDataToSend1] = useState("");
+    const [latitude, setLatitudeSend] = useState("");
+    const [longitude, setLongitudeSend] = useState("");
+
+    navigator.geolocation.watchPosition(function (position, error) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        setLatitudeSend(latitude)
+        setLongitudeSend(longitude)
+
+    }
+    );
+
+
 
 
     const sendData = () => {
@@ -20,23 +32,27 @@ const Login = () => {
         fetch("login", requestOptions)
             .then((response) => response.json())
             .then((res) => {
-                setInterval(() => { 
-                    if (res.message === true){
+                setInterval(() => {
+                    if (res.message === true) {
                         localStorage.setItem('user', JSON.stringify({
+                            logId: res.id,
                             logNombre: res.nombre,
                             logEmail: res.email,
                             logUrlImg: res.urlImg,
                             logAbout: res.about,
-                            logLong: res.longitud,
-                            logLat: res.latitud,
-                            
+                            longitude,
+                            latitude,
+                            logBike: res.bike,
+                            logAnio: res.anio,
+
+
                         }));
                         window.location.assign("/UPage");
-                    }else{
+                    } else {
                         alert("Usuario o contraseña incorrectos")
                     }
                 }
-                , 1000);
+                    , 1000);
             });
 
 

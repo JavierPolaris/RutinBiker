@@ -99,7 +99,7 @@ body {
 
 .registro {
   text-align: center;
-  margin-top: -203px;
+   margin-top: -73px;
 
 
 }
@@ -405,8 +405,7 @@ body {
   border-radius: 37px;
   position: relative;
   top: 41px;
-
-  width: 961px;
+  width: 1329px;
   padding: 10px;
 
 }
@@ -428,7 +427,7 @@ body {
   font-family: 'Poppins', sans-serif;
   font-size: 10px;
   color: #111111;
-  margin: 36px 0px 0px 30px;
+  margin: 5px 0px 0px 30px;
   /* display: flex; */
   /* flex-direction: column; */
   /* align-items: center; */
@@ -451,7 +450,7 @@ body {
 
 }
 
-.buttonRecRut{
+.buttonRecRut {
   box-sizing: border-box;
   width: 145px;
   height: 147px;
@@ -471,13 +470,13 @@ body {
 
 .home-cont {
   box-sizing: border-box;
-  max-width: 545px;
-  min-width: 545px;
-  max-height: 401px;
+  max-width: 684px;
+  min-width: 684px;
+  max-height: 513px;
   display: flex;
   background: #FFE926;
   border: 1px solid #E7E7E7;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
   border-radius: 37px;
   padding: 10px;
 }
@@ -493,4 +492,109 @@ body {
 .liStile {
   padding: 0px 22px 4px 5px;
 
+}
+.home-Right{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+}
+
+.home-historial {
+  box-sizing: border-box;
+  width: 684px;
+  height: 352px;
+  background: #FFFFFF;
+  border: 1px solid #E7E7E7;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 37px;
+}
+
+.tusRutas {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 33px;
+  color: #000000;
+  margin-left: 48px;
+}
+
+.home-historial-Block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-historial-baner {
+  box-sizing: border-box;
+  /* width: 652px; */
+  position: relative;
+  left: 144px;
+
+}
+.home-historial-Newtext{
+  display: flex;
+  position: relative;
+  left: 27px;
+}
+
+.home-historial-text {
+  box-sizing: border-box;
+  display: flex;
+  width: 610px;
+  height: 117px;
+  background: #FFFFFF;
+  border: 1px solid #E7E7E7;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  border-radius: 37px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.home-historial-banerRut {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-historial-banerRutFlecha {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nameRut {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 33px;
+  color: #000000;
+}
+
+.locationRut {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 16px;
+  color: #818181;
+  margin-top: 21px;
+  margin-left: 6px;
+}
+
+.flecha {
+  height: 54px;
+}
+
+.kmRut{
+  font-family: 'Poppins';
+font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 22px;
 }

@@ -26,6 +26,8 @@ const user = {
         let about = req.body.about;
         let longitud = req.body.longitud;
         let latitud = req.body.latitud;
+        let bike = req.body.bike;
+        let anio = req.body.anio;
 
 
         const nameExp = new RegExp(/^([A-Za-z]{1,15})$/);
@@ -72,7 +74,8 @@ const user = {
                                     console.log("Y hasheada es: " + palabraSecretaEncriptada);
                                     palabraEncriptada = palabraSecretaEncriptada;
                                     // Aqui introducimos los datos en la base de datos cuando no existe el email
-                                    let query = "INSERT INTO Usuarios (nombre, email, contrasena, about, urlImg, longitud, latitud) VALUES (?,?,?,?,?,?,?)";
+                                    let query = "INSERT INTO Usuarios (nombre, email, contrasena, about, urlImg, longitud, latitud, modelo, anio) VALUES (?,?,?,?,?,?,?,?,?)";
+
                                     let query2 = mysql.format(query, [
                                         nombre,
                                         email,
@@ -80,12 +83,19 @@ const user = {
                                         about,
                                         urlImg,
                                         longitud,
-                                        latitud
+                                        latitud,
+                                        bike,
+                                        anio,
+
                                     ]);
+                                    console.log(query2)
+
+
                                     connection.query(query2, (err, result) => {
                                         if (err) {
                                             console.log(err);
                                         } else {
+
                                             console.log("insertado");
 
                                         }
@@ -96,8 +106,7 @@ const user = {
                             })
                         }
                     }
-                }
-                );
+                })
             }
         }
         res.json({
@@ -107,9 +116,15 @@ const user = {
             about,
             urlImg,
             longitud,
-            latitud
+            latitud,
+            bike,
+            anio
         })
     },
+
+
+
+
 
     login: (req, res) => {
         loginEmail = req.body.email;
@@ -142,6 +157,7 @@ const user = {
                     connection.query(query3, (err, data) => {
                         if (err) throw err;
                         console.log(data);
+                        id = data[0].id;
                         nombre = data[0].nombre;
                         email = data[0].email;
                         urlImg = data[0].urlImg;
@@ -149,6 +165,11 @@ const user = {
                         about = data[0].about;
                         longitud = data[0].longitud;
                         latitud = data[0].latitud;
+                        bike = data[0].modelo;
+                        anio = data[0].anio;
+                    
+
+                        
                     });
 
                 } else {
@@ -157,6 +178,7 @@ const user = {
 
             });
         })
+        
         res.json({
             message: true,
             email,
@@ -164,7 +186,10 @@ const user = {
             about,
             urlImg,
             longitud,
-            latitud
+            latitud,
+            bike,
+            anio,
+            id
         })
 
     },
@@ -185,16 +210,55 @@ const user = {
         fs.writeFileSync('ruta.json', json_rutas);
 
 
+    },
+
+    historial: (req, res) => {
+       const idUser =  req.body.logId;
+        console.log('estes es el id: ' + idUser);
+      let selectQuery = "SELECT * FROM ?? WHERE ?? = ?";
+        let query3 = mysql.format(selectQuery, [
+            "Usuarios_Rutas",
+            "fk_id_usuario",
+            idUser
+        ]);
+        console.log(query3);
+        connection.query(query3, (err, data) => {   
+            if (err) throw err;
+            console.log(data[0].fk_id_ruta);
+            console.log(data[0].fecha);
+            const fecha = data[0].fecha;
+            const idRuta = data[0].fk_id_ruta;
+            let selectQueryRutas = "SELECT * FROM ?? WHERE ?? = ?";
+            let queryRuta = mysql.format(selectQueryRutas, [
+                "Rutas",
+                "id",
+                idRuta,
+            ]);
+            connection.query(queryRuta, (err, data) => {
+                if (err) throw err;
+                console.log(data);
+                res.json({
+                    message: true,
+                    nombre: data[0].nombre,
+                    provincia: data[0].provincia,
+                    km: data[0].km,
+                    fecha,
+                });
+            }
+            );
+       
+        }
+        );
+
+           
+
+
+
+
+
+
+
     }
-
-
-
-
-
-
-
-
-
 }
 
 module.exports = user;
