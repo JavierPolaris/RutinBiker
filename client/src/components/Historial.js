@@ -4,36 +4,54 @@ import { Card } from 'react-bootstrap';
 
 import '../App.css';
 
+
 const Historial = () => {
-
-    const [historial, setHistorial] = useState([]);
-
-    console.log(historial);
-
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            logId: JSON.parse(localStorage.getItem('user')).logId
-        }),
-    };
-
+    
+    
+    
+    const [UserHistorial, setHistorial] = useState([]);
+    
+    
+    
+    
     useEffect(() => {
-        fetch('historial', requestOptions)
-            .then(res => res.json())
-            .then((res) => {
-                setHistorial(res);
-
-            }
-            )
+        
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    logId: JSON.parse(localStorage.getItem('user')).logId
+                }),
+            };
+        
+            fetch('historial', requestOptions)
+                .then(res => res.json())
+                .then((res) => {
+                    setHistorial(res.rutasUser);
+                    console.log(res.rutasUser);
+                    
+                }
+                )
+                .catch(err => {
+                    console.log(err);
+                }
+                )
+        
     }, [])
+    
+ 
 
 
+console.log(UserHistorial);
     return (
-        <div className="historial">
-            {historial ?
+      <div className="historial">
 
+        {UserHistorial ? UserHistorial.map((historial,i) => {
 
+              console.log(historial);
+
+ 
+                return (
                 <Card className="home-historial-Block">
                     <Card className="home-historial-text">
                         <Card className="home-historial-Newtext">
@@ -54,7 +72,7 @@ const Historial = () => {
                                 <h2 className='locationRut'>{historial.provincia}</h2>
                             </Card>
                             <Card className="home-historial-banerRutFlecha">
-                                <img src={flecha} className="flecha" />
+                                <Card.Img src={flecha} className="flecha" />
                                 <h3 className='kmRut'>{historial.km}</h3>
 
 
@@ -62,10 +80,12 @@ const Historial = () => {
                         </Card>
                     </Card>
                 </Card>
-                : <div>Cargando...</div>}
+                ) 
+              }): <div>Cargando...</div>}  
+          </div>      
 
 
-        </div>
+        
     )
 }
 

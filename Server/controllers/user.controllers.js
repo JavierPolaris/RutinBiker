@@ -9,16 +9,20 @@
 const mongo = require("mongodb");
 const MongoClient = mongo.MongoClient;
 const url = "mongodb://127.0.0.1:27017/";
-const mongoose = require("mongoose");
-const connection = require("../database/sqlDataBase");
-const mysql = require("mysql");
+
+
+const Sequelize = require('sequelize');
 const bcrypt = require("bcrypt");
 const fs = require("fs");
+
+const Usuario = require("../models/Usuario");
+const Ruta = require("../models/Rutas");
+const UsuariosRutas = require("../models/UsuariosRutas");
 
 
 const user = {
 
-    saveDataForm: (req, res) => {
+    saveDataForm: async (req, res) => {
         let nombre = req.body.username;
         let email = req.body.email;
         let urlImg = req.body.urlImg;
@@ -49,84 +53,52 @@ const user = {
             console.log("campos incorrectos");
         } else {
             // Aqui introducimos los datos en la base de datos
-            let selectQuery = 'SELECT * FROM ?? WHERE ?? = ?';
-            let query3 = mysql.format(selectQuery, [
-                "Usuarios",
-                "email",
-                email,
-            ]);
-            console.log(email);
-            // Aqui comprobamos si el email ya existe en la base de datos
-            if (connection) {
-                connection.query(query3, (err, result) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        if (result.length > 0) {
-                            console.log("ya existe");
+            const comprobarUser = await Usuario.findOne({
+                where: {
+                    email: email
+                }
 
-                        } else {
-                            bcrypt.hash(contrasena, 10, (err, palabraSecretaEncriptada) => {
-                                if (err) {
-                                    console.log("Error hasheando:", err);
-                                } else {
+            });
+            console.log(comprobarUser);
+            if (comprobarUser) {
+                console.log("El usuario ya existe");
+            }
+            else {
+                const salt = bcrypt.genSaltSync(10);
+                const hash = bcrypt.hashSync(contrasena, salt);
+              const user =  Usuario.create({
+                    nombre: nombre,
+                    email: email,
+                    urlImg: urlImg,
+                    contrasena: hash,
+                    about: about,
+                    longitud: longitud,
+                    latitud: latitud,
+                    modelo: bike,
+                    anio: anio
+                });
+                console.log("Usuario creado");
 
-                                    console.log("Y hasheada es: " + palabraSecretaEncriptada);
-                                    palabraEncriptada = palabraSecretaEncriptada;
-                                    // Aqui introducimos los datos en la base de datos cuando no existe el email
-                                    let query = "INSERT INTO Usuarios (nombre, email, contrasena, about, urlImg, longitud, latitud, modelo, anio) VALUES (?,?,?,?,?,?,?,?,?)";
-
-                                    let query2 = mysql.format(query, [
-                                        nombre,
-                                        email,
-                                        palabraEncriptada,
-                                        about,
-                                        urlImg,
-                                        longitud,
-                                        latitud,
-                                        bike,
-                                        anio,
-
-                                    ]);
-                                    console.log(query2)
-
-
-                                    connection.query(query2, (err, result) => {
-                                        if (err) {
-                                            console.log(err);
-                                        } else {
-
-                                            console.log("insertado");
-
-                                        }
-
-                                    }
-                                    );
-                                }
-                            })
-                        }
-                    }
+                res.json({
+                    message: true,
+                    email,
+                    nombre,
+                    about,
+                    urlImg,
+                    longitud,
+                    latitud,
+                    bike,
+                    anio
                 })
             }
         }
-        res.json({
-            message: true,
-            email,
-            nombre,
-            about,
-            urlImg,
-            longitud,
-            latitud,
-            bike,
-            anio
-        })
     },
 
 
 
 
 
-    login: (req, res) => {
+    login: async(req, res) => {
         loginEmail = req.body.email;
         passLog = req.body.password;
 
@@ -135,62 +107,45 @@ const user = {
         // }
         console.log(loginEmail);
 
-        let nameCorrect = `SELECT email,contrasena FROM Usuarios where email = '${loginEmail}'`;
-        // Aqui comprobamos si el email existe en la base de datos
-        connection.query(nameCorrect, (err, rows) => {
-            if (err) throw err;
 
-            console.log('Usuario: \n', rows);
-            bcrypt.compare(passLog, rows[0].contrasena).then(function (result) {
-
-                if (result && rows[0].email == loginEmail) {
-                    console.log("Usuario correcto");
-                    let selectQuery = "SELECT * FROM ?? WHERE ?? = ?";
-
-                    let query3 = mysql.format(selectQuery, [
-                        "Usuarios",
-                        "email",
-                        loginEmail,
-                    ]);
-                    console.log("selectQuery" + selectQuery);
-                    console.log("query3" + query3);
-                    connection.query(query3, (err, data) => {
-                        if (err) throw err;
-                        console.log(data);
-                        id = data[0].id;
-                        nombre = data[0].nombre;
-                        email = data[0].email;
-                        urlImg = data[0].urlImg;
-                        contrasena = data[0].contrasena;
-                        about = data[0].about;
-                        longitud = data[0].longitud;
-                        latitud = data[0].latitud;
-                        bike = data[0].modelo;
-                        anio = data[0].anio;
-                    
-
-                        
-                    });
-
-                } else {
-                    console.log("contraseña incorrecta");
-                }
-
-            });
-        })
+        const comprobarUser = await Usuario.findOne({
+            where: {
+                email: loginEmail
+            }
+        });
         
-        res.json({
-            message: true,
-            email,
-            nombre,
-            about,
-            urlImg,
-            longitud,
-            latitud,
-            bike,
-            anio,
-            id
-        })
+        if (comprobarUser) {
+            console.log("El usuario existe");
+            const salt = bcrypt.genSaltSync(10);
+            const hash = bcrypt.hashSync(passLog, salt);
+            const comprobarPass = bcrypt.compareSync(passLog, hash);
+            if (comprobarPass) {
+                console.log("Contraseña correcta");
+                console.log(comprobarUser.dataValues.id);
+                res.json({
+                    message: true,
+                    id: comprobarUser.dataValues.id,
+                    nombre: comprobarUser.dataValues.nombre,
+                    email: comprobarUser.dataValues.email,
+                    urlImg: comprobarUser.dataValues.urlImg,
+                    about: comprobarUser.dataValues.about,
+                    longitud: comprobarUser.dataValues.longitud,
+                    latitud: comprobarUser.dataValues.latitud,
+                    bike: comprobarUser.dataValues.modelo,
+                    anio: comprobarUser.dataValues.anio
+                });
+
+            } else {
+                console.log("contraseña incorrecta");
+                res.json({
+                    message: false
+                });
+            }
+
+        };
+
+
+
 
     },
     regRute: (req, res) => {
@@ -212,53 +167,107 @@ const user = {
 
     },
 
-    historial: (req, res) => {
-       const idUser =  req.body.logId;
-        console.log('estes es el id: ' + idUser);
-      let selectQuery = "SELECT * FROM ?? WHERE ?? = ?";
-        let query3 = mysql.format(selectQuery, [
-            "Usuarios_Rutas",
-            "fk_id_usuario",
-            idUser
-        ]);
-        console.log(query3);
-        connection.query(query3, (err, data) => {   
-            if (err) throw err;
-            console.log(data[0].fk_id_ruta);
-            console.log(data[0].fecha);
-            const fecha = data[0].fecha;
-            const idRuta = data[0].fk_id_ruta;
-            let selectQueryRutas = "SELECT * FROM ?? WHERE ?? = ?";
-            let queryRuta = mysql.format(selectQueryRutas, [
-                "Rutas",
-                "id",
-                idRuta,
-            ]);
-            connection.query(queryRuta, (err, data) => {
-                if (err) throw err;
-                console.log(data);
-                res.json({
-                    message: true,
-                    nombre: data[0].nombre,
-                    provincia: data[0].provincia,
-                    km: data[0].km,
-                    fecha,
-                });
+    historial: async(req, res) => {
+
+        const idUser = req.body.logId;
+
+        // console.log('estes es el id: ' + idUser);
+
+        
+
+        const historial = await UsuariosRutas.findAll({
+            where: {
+                fk_id_usuario: idUser
             }
-            );
-       
-        }
-        );
+        });
+        if (historial.length ==  0) {
+            console.log("El usuario no ha hecho rutas");
+            res.json({
+                message: false
+            });
 
+        } else {
+            
+            console.log("El usuario ha hecho rutas");
+
+            let idArray = [];
+            let rutasUser = [];
+            historial.map(
+              (elemento) => {
+                 idArray.push (elemento.dataValues.fk_id_ruta);
+              }
+            )
+             for (let i = 0; i < idArray.length; i++) {
+                const ruta = await Ruta.findOne({
+                    where: {
+                        id: idArray[i]
+                    }
+                });
+               rutasUser.push(ruta.dataValues);
+
+               
+
+              
+             }
            
+            console.log(rutasUser);
+            res.json({
+                message: true,
+                rutasUser
+            });
+        }
+    
+
+        
+
+    //     let selectQuery = "SELECT * FROM ?? WHERE ?? = ?";
+    //     let query3 = mysql.format(selectQuery, [
+    //         "Usuarios_Rutas",
+    //         "fk_id_usuario",
+    //         idUser
+    //     ]);
+    //     // console.log(query3);
 
 
+    //     connection.query(query3, async (err, data) => {
+    //         if (err) throw err;
+
+    //         console.log(data.length);
+    //         console.log("********")
+    //         var data22 = []
+    //         var historialUser = [];
+
+    //         for (let i = 0; i < data.length; i++) {
+    //             // console.log(data.length);
+    //             let selectQuery = "SELECT * FROM ?? WHERE ?? = ?";
+    //             let query3 = mysql.format(selectQuery, [
+    //                 "Rutas",
+    //                 "id",
+    //                 data[i].fk_id_ruta,
+
+    //             ]);
+    //             // console.log(query3);
+    //             const conexion = connection.query(query3, (err, data2) => {
+    //                 if (err) throw err;
+    //                 // console.log(await data2);
 
 
+    //                 historialUser.push(data22);
+    //                 return data2
 
 
+    //             });
+    //             setTimeout(() => {
+    //                 console.log(historialUser);
+    //             }
+    //                 , 2000);
 
-    }
-}
+    //             // console.log(historialUser);
+
+
+    //         }
+    //     })
+     }
+};
 
 module.exports = user;

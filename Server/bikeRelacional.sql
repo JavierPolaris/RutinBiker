@@ -7,12 +7,12 @@ USE bikeRelacional;
 CREATE TABLE Usuarios (
 id INT AUTO_INCREMENT,
 nombre VARCHAR(300) NOT NULL,
-email VARCHAR(300),
+email VARCHAR(300) NOT NULL,
 urlImg varchar(300) NOT NULL,
 contrasena VARCHAR(300) NOT NULL,
 about VARCHAR(5000) NOT NULL,
-longitud VARCHAR(500),
-latitud VARCHAR(500),
+longitud VARCHAR(500) NOT NULL,
+latitud VARCHAR(500) NOT NULL,
 modelo VARCHAR(300) NOT NULL,
 anio CHAR(4) NOT NULL,
 PRIMARY KEY(id)
@@ -31,7 +31,7 @@ PRIMARY KEY(id)
 );
 
 
-INSERT INTO Rutas VALUES(null, "Oces del Duraton", "Cacers", "230Km");
+INSERT INTO Rutas VALUES(null, "Cazorla", "Jaén", "330Km");
 
 SELECT * FROM Rutas;
 
@@ -49,5 +49,5 @@ FOREIGN KEY(fk_id_ruta) REFERENCES Rutas(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
-INSERT INTO Usuarios_Rutas VALUES(null, "2022-03-02", "2", "1");
+INSERT INTO Usuarios_Rutas VALUES(null, "2022-10-12", "2", "1");
 SELECT * FROM Usuarios_Rutas;

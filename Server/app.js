@@ -2,8 +2,8 @@
 
 const express = require("express");
 const app = express();
-require("./database/mongo")
-require("./database/sqlDataBase")
+require("./databases/mongo");
+require("./databases/sqlDataBase")
 
 const router = require("./routes/routes")
 const PORT = process.env.PORT || 5001;

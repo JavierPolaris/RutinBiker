@@ -18,6 +18,8 @@
     "mongodb": "^4.7.0",
     "moongose": "^1.0.0",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.18"
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.18",
+    "sequelize": "^6.21.2"
   }
 }
