@@ -35,18 +35,15 @@ const Popular = () => {
                         <Card className="home-Popular-text">
                             <Card className="home-Popular-text2">
                                 <h3 className='newPopu'>NEW</h3>
-                                <h3 className='newPopuRut'>RUTA</h3>
+                                <h3 className='newPopuRut'>TRACK</h3>
                             </Card>
-                            <Card className="home-historial-baner">
-                                <Card className="home-historial-banerRut">
+                            <Card className="home-Popular-baner ">
+                                <Card className="home-Popular-banerRut">
                                     <h1 className='nameRut'>{popular.nombre}</h1>
-                                    <h2 className='locationRut'>{popular.nombre}</h2>
+                                    <h2 className='locationRut'>{popular.provincia}</h2>
                                 </Card>
                                 <Card className="home-historial-banerRutFlecha">
-                                   
-                                    <h3 className='kmRut'>{popular.nombre}</h3>
-
-
+                                    <h3 className='kmRut'>{popular.km}</h3>
                                 </Card>
                             </Card>
                         </Card>

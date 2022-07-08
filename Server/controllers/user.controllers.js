@@ -223,6 +223,7 @@ const user = {
      popular: async(req, res) => {
 
         try {
+            const RutasPopulares = [];
             const rutas = await Ruta.findAll({
                 order: [
                     ['id', 'DESC']
@@ -231,6 +232,9 @@ const user = {
             });
             console.log("Las rutas mas populares");
             console.log(rutas);
+
+            RutasPopulares.push(rutas);
+            
             res.json({
                 message: true,
                 rutas

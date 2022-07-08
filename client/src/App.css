@@ -543,6 +543,13 @@ body {
   left: 144px;
 
 }
+.home-Popular-baner {
+  box-sizing: border-box;
+  /* width: 652px; */
+  position: relative;
+  left: 8px;
+
+}
 
 .home-historial-Newtext {
   display: flex;
@@ -582,12 +589,21 @@ body {
   left: 62px;
 }
 
-.newPopuRut{
+.newPopu{
   color: red;
 }
-
+.fivePopular{
+  margin-top: 10px;
+  overflow-y: scroll;
+}
 
 .home-historial-banerRut {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.home-Popular-banerRut {
   display: flex;
   flex-direction: row;
   justify-content: center;
