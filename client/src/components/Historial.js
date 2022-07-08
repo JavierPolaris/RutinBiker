@@ -81,7 +81,10 @@ console.log(UserHistorial);
                     </Card>
                 </Card>
                 ) 
-              }): <div>Cargando...</div>}  
+              }): <div className='noRutes'>
+                <h1>Create new routes...</h1>
+                <h1>Conquer your dreams!!</h1>
+                </div>}  
           </div>      
 
 

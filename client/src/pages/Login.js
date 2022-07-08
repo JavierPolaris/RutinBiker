@@ -40,8 +40,8 @@ const Login = () => {
                             logEmail: res.email,
                             logUrlImg: res.urlImg,
                             logAbout: res.about,
-                            longitude,
-                            latitude,
+                            latitud: res.latitud,
+                            longitud: res.longitud,
                             logBike: res.bike,
                             logAnio: res.anio,
 

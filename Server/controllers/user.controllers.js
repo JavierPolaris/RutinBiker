@@ -113,7 +113,7 @@ const user = {
                 email: loginEmail
             }
         });
-        
+        console.log(comprobarUser.dataValues.longitud);
         if (comprobarUser) {
             console.log("El usuario existe");
             const salt = bcrypt.genSaltSync(10);
@@ -121,7 +121,7 @@ const user = {
             const comprobarPass = bcrypt.compareSync(passLog, hash);
             if (comprobarPass) {
                 console.log("Contraseña correcta");
-                console.log(comprobarUser.dataValues.id);
+                console.log(comprobarUser.dataValues);
                 res.json({
                     message: true,
                     id: comprobarUser.dataValues.id,
@@ -172,102 +172,77 @@ const user = {
         const idUser = req.body.logId;
 
         // console.log('estes es el id: ' + idUser);
-
-        
-
-        const historial = await UsuariosRutas.findAll({
-            where: {
-                fk_id_usuario: idUser
-            }
-        });
-        if (historial.length ==  0) {
+        try {
+            const historial = await UsuariosRutas.findAll({
+            
+                where: {
+                    fk_id_usuario: idUser
+                }
+                
+            });
+         
+                
+                console.log("El usuario ha hecho rutas");
+    
+                let idArray = [];
+                let rutasUser = [];
+                historial.map(
+                  (elemento) => {
+                     idArray.push (elemento.dataValues.fk_id_ruta);
+                  }
+                )
+                 for (let i = 0; i < idArray.length; i++) {
+                    const ruta = await Ruta.findOne({
+                        where: {
+                            id: idArray[i]
+                        }
+                    });
+                   rutasUser.push(ruta.dataValues);
+    
+                   
+    
+                  
+                 }
+               
+                console.log(rutasUser);
+                res.json({
+                    message: true,
+                    rutasUser
+                });
+            // }
+        } catch (error) {
             console.log("El usuario no ha hecho rutas");
             res.json({
                 message: false
             });
-
-        } else {
-            
-            console.log("El usuario ha hecho rutas");
-
-            let idArray = [];
-            let rutasUser = [];
-            historial.map(
-              (elemento) => {
-                 idArray.push (elemento.dataValues.fk_id_ruta);
-              }
-            )
-             for (let i = 0; i < idArray.length; i++) {
-                const ruta = await Ruta.findOne({
-                    where: {
-                        id: idArray[i]
-                    }
-                });
-               rutasUser.push(ruta.dataValues);
-
-               
-
-              
-             }
-           
-            console.log(rutasUser);
-            res.json({
-                message: true,
-                rutasUser
-            });
         }
-    
-
+       
         
 
-    //     let selectQuery = "SELECT * FROM ?? WHERE ?? = ?";
-    //     let query3 = mysql.format(selectQuery, [
-    //         "Usuarios_Rutas",
-    //         "fk_id_usuario",
-    //         idUser
-    //     ]);
-    //     // console.log(query3);
+     },
+     popular: async(req, res) => {
 
-
-    //     connection.query(query3, async (err, data) => {
-    //         if (err) throw err;
-
-    //         console.log(data.length);
-    //         console.log("********")
-    //         var data22 = []
-    //         var historialUser = [];
-
-    //         for (let i = 0; i < data.length; i++) {
-    //             // console.log(data.length);
-    //             let selectQuery = "SELECT * FROM ?? WHERE ?? = ?";
-    //             let query3 = mysql.format(selectQuery, [
-    //                 "Rutas",
-    //                 "id",
-    //                 data[i].fk_id_ruta,
-
-    //             ]);
-    //             // console.log(query3);
-    //             const conexion = connection.query(query3, (err, data2) => {
-    //                 if (err) throw err;
-    //                 // console.log(await data2);
-
-
-    //                 historialUser.push(data22);
-    //                 return data2
-
-
-    //             });
-    //             setTimeout(() => {
-    //                 console.log(historialUser);
-    //             }
-    //                 , 2000);
-
-    //             // console.log(historialUser);
-
-
-    //         }
-    //     })
-     }
+        try {
+            const rutas = await Ruta.findAll({
+                order: [
+                    ['id', 'DESC']
+                ],
+                limit: 5
+            });
+            console.log("Las rutas mas populares");
+            console.log(rutas);
+            res.json({
+                message: true,
+                rutas
+            });
+        } catch (error) {
+            console.log("No hay rutas");
+            res.json({
+                message: false
+            });
+        }
+       
+    }
 };
 
 module.exports = user;

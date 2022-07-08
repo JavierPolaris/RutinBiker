@@ -99,7 +99,7 @@ body {
 
 .registro {
   text-align: center;
-   margin-top: -73px;
+  margin-top: -73px;
 
 
 }
@@ -493,7 +493,8 @@ body {
   padding: 0px 22px 4px 5px;
 
 }
-.home-Right{
+
+.home-Right {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -508,6 +509,8 @@ body {
   border: 1px solid #E7E7E7;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 37px;
+  overflow-y: scroll;
+
 }
 
 .tusRutas {
@@ -526,6 +529,12 @@ body {
   justify-content: center;
   margin-bottom: 10px;
 }
+.home-Popular-Block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
 
 .home-historial-baner {
   box-sizing: border-box;
@@ -534,7 +543,8 @@ body {
   left: 144px;
 
 }
-.home-historial-Newtext{
+
+.home-historial-Newtext {
   display: flex;
   position: relative;
   left: 27px;
@@ -554,6 +564,28 @@ body {
   justify-content: flex-start;
   align-items: center;
 }
+.home-Popular-text {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  /* height: 117px; */
+  background: #FFFFFF;
+  border: 1px solid #E7E7E7;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  border-radius: 37px;
+}
+
+.home-Popular-text2{
+  display: flex;
+  align-items: center;
+  position: relative;
+  left: 62px;
+}
+
+.newPopuRut{
+  color: red;
+}
+
 
 .home-historial-banerRut {
   display: flex;
@@ -592,10 +624,43 @@ body {
   height: 54px;
 }
 
-.kmRut{
+.kmRut {
   font-family: 'Poppins';
-font-style: normal;
-font-weight: 600;
-font-size: 15px;
-line-height: 22px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.noRutes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  margin-top: 54px;
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 12px 0 rgb(31 38 135 / 37%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 67px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+
+}
+
+
+.mostPopular-conten{
+  display: flex;
+  background: #ADA6A2;
+  height: 100%;
+  position: relative;
+  right: 551px;
+}
+.mostPopular-line {
+  width: 311.5px;
+  height: 3px;
+  background: rgb(251, 255, 0);
+  flex: none;
+  order: 2;
+  flex-grow: 1;
 }

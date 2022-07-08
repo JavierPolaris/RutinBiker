@@ -39,7 +39,7 @@ const Registro = () => {
                 latitud: latitude,
                 longitud: longitude,
                 bike: bike,
-                anio: anio
+                anio: anio 
             }),
 
         };
@@ -54,8 +54,8 @@ const Registro = () => {
                             logEmail: res.email,
                             logUrlImg: res.urlImg,
                             logAbout: res.about,
-                            latitude,
-                            longitude,
+                            latitud: res.latitud,
+                            longitud: res.longitud,
                             logBike: res.bike,
                             logAnio: res.anio,
 

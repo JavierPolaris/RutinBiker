@@ -11,8 +11,20 @@ import './App.css';
 
 function App() {
   const [user, setUser] = useState(null);
-
-
+ 
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    setUser(user);
+  }
+    , []);
+  return (
+    <BrowserRouter>
+      <Nav user={user} />
+      <MainComponent user={user} />
+     
+    </BrowserRouter>
+  );
+  
 
   console.log(user);
 

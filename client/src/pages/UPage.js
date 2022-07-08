@@ -53,12 +53,12 @@ const UPage = () => {
               <div className="home-cont-text">
                 <h1 style={{ color: 'red', marginRight: '0px' }}>Lati</h1>
                 <h1 style={{ color: 'grey', marginRight: '37px' }}>tud:</h1>
-                <h1 style={{ fontSize: '20px' }}>{user.latitude}</h1>
+                <h1 style={{ fontSize: '20px' }}>{user.latitud}</h1>
               </div>
               <div className="home-cont-text">
                 <h1 style={{ color: 'red', marginRight: '0px' }}>Longi</h1>
                 <h1 style={{ color: 'grey', marginRight: '37px' }}>tud:</h1>
-                <h1 style={{ fontSize: '20px' }}>{user.longitude}</h1>
+                <h1 style={{ fontSize: '20px' }}>{user.longitud}</h1>
               </div>
               <div className="home-cont-text">
                 <h1 style={{ color: 'red', marginRight: '0px' }}>About</h1>

@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Registro from "../pages/Registro";
 import UPage from "../pages/UPage";
+import Community from "../pages/Community";
 
 
 class Main extends Component {
@@ -16,6 +17,8 @@ class Main extends Component {
                 <Route path="/login" element={<Login />} />
                 <Route path="/singUp" element={<Registro />} />
                 <Route path="/UPage" element={<UPage />} />
+                <Route path="/community" element={<Community />} />
+                <Route path="*" element={<p>There's nothing here: 404!</p>} />
                 
             </Routes>
         </div>
