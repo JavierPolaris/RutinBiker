@@ -138,6 +138,9 @@ body {
 }
 
 .headerNav {
+
+}
+.navbar{
   box-sizing: border-box;
   background-color: #fff;
   /* background-color: #282c34; */
@@ -148,6 +151,7 @@ body {
   color: white;
   border-bottom: 1px solid rgba(102, 102, 102, 0.25);
   flex-wrap: nowrap;
+  z-index: 29;
 }
 
 .navbar-sing {
@@ -157,8 +161,8 @@ body {
   height: 7vh;
   font-size: calc(10px + 2vmin);
   color: white;
-  z-index: 1;
-  /* background-color: #282c34; */
+  z-index: 23;
+  background-color: #282c34;
   align-items: center;
   flex-wrap: nowrap;
   justify-content: flex-end;
@@ -167,13 +171,13 @@ body {
 .navbar-brand {
   display: flex;
   flex-direction: row;
-  width: 100%;
-  z-index: 2;
-  height: 7vh;
+  width: 76%;
+  z-index: 23;
+  /* height: 7vh; */
   font-size: calc(10px + 2vmin);
   color: white;
   margin-top: -33px;
-  /* background-color: #282c34; */
+  background-color: #282c34;
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: flex-start;
@@ -393,7 +397,7 @@ body {
   text-align: center;
 }
 
-.boinputsReg {}
+
 
 
 
@@ -529,6 +533,7 @@ body {
   justify-content: center;
   margin-bottom: 10px;
 }
+
 .home-Popular-Block {
   display: flex;
   align-items: center;
@@ -543,11 +548,12 @@ body {
   left: 144px;
 
 }
+
 .home-Popular-baner {
   box-sizing: border-box;
   /* width: 652px; */
   position: relative;
-  left: 8px;
+  left: 57px;
 
 }
 
@@ -571,6 +577,7 @@ body {
   justify-content: flex-start;
   align-items: center;
 }
+
 .home-Popular-text {
   box-sizing: border-box;
   display: flex;
@@ -582,17 +589,19 @@ body {
   border-radius: 37px;
 }
 
-.home-Popular-text2{
+.home-Popular-text2 {
   display: flex;
   align-items: center;
   position: relative;
-  left: 62px;
+  left: 143px;
+  margin-bottom: -11px;
 }
 
-.newPopu{
+.newPopu {
   color: red;
 }
-.fivePopular{
+
+.fivePopular {
   margin-top: 10px;
   overflow-y: scroll;
 }
@@ -603,9 +612,10 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .home-Popular-banerRut {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -614,6 +624,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.imagenTop5 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 97px;
+  height: 97px;
+  margin-top: 10px;
+  border: 1px solid #D8D8D8;
+  border-radius: 179px
 }
 
 .nameRut {
@@ -632,7 +652,7 @@ body {
   font-size: 11px;
   line-height: 16px;
   color: #818181;
-  margin-top: 21px;
+  margin-top: -26px;
   margin-left: 6px;
 }
 
@@ -665,13 +685,14 @@ body {
 }
 
 
-.mostPopular-conten{
+.mostPopular-conten {
   display: flex;
   background: #ADA6A2;
   height: 100%;
   position: relative;
   right: 551px;
 }
+
 .mostPopular-line {
   width: 311.5px;
   height: 3px;
@@ -679,4 +700,202 @@ body {
   flex: none;
   order: 2;
   flex-grow: 1;
+}
+
+
+.homeNoticias-line {
+  width: 825.5px;
+  height: 3px;
+  background: rgb(0 0 0);
+  flex: none;
+  margin-top: -30px;
+}
+
+/* 
+.MapaCommunity{
+  width: 100px;
+  height: inherit;
+} */
+
+.bannerHome {
+  display: flex;
+  box-sizing: border-box;
+  height: 234px;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 43px;
+}
+
+.contFoto {
+  width: 100%;
+  position: relative;
+  /* height: 780px; */
+}
+
+.botones {
+  font-size: 60px;
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  border-radius: 50%;
+  background-color: rgba(135, 135, 135, 0.5);
+  text-align: center;
+  font-weight: bold;
+  position: absolute;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.botones:hover {
+  cursor: pointer;
+  transform: scale(1.2, 1.2);
+}
+
+.atras {
+
+  left: 2%;
+  top: 178px
+}
+
+.adelante {
+  right: 2%;
+  top: 178px
+}
+
+.imgBaner {
+  width: 100%;
+  margin-top: 19px;
+  object-fit: cover;
+
+}
+
+.home-conten {
+  display: flex;
+  flex-direction: column;
+}
+
+.noticias {
+  margin-top: 93px;
+}
+
+.Desplegable {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+
+}
+
+.biciHome {
+  width: 579px;
+  height: 886px;
+  overflow: hidden;
+  /* margin: 10px; */
+  position: relative;
+  top: -825px;
+  transition: top 0.5s  ease-out;
+}
+.biciHome:hover{
+  top: 0px;
+  
+
+}
+
+.motoHome {
+  width: 697px;
+  height: 1047px;
+  overflow: hidden;
+  /* margin: 10px; */
+  position: relative;
+ top: -984px;
+ transition: top 0.5s  ease-out;
+}
+.motoHome:hover{
+  top: -200px;
+  
+
+}
+
+.biciImgHome {
+  display: flex;
+  position: absolute;
+  left: -210%;
+  right: -100%;
+  top: -70%;
+  bottom: -100%;
+  margin: auto;
+  min-height: 100%;
+  min-width: 100%;
+  z-index: 3;
+}
+
+.motoImgHome {
+  display: flex;
+  position: absolute;
+  left: -98%;
+  right: -100%;
+  top: -70%;
+  bottom: -100%;
+  margin: auto;
+  min-height: 100%;
+  min-width: 100%;
+  z-index: 3;
+}
+
+.banerHomeContendor {
+  position: absolute;
+  z-index: 2;
+}
+
+.linkLogHome {
+  z-index: 4;
+  display: flex;
+  position: absolute;
+  font-size: 15rem;
+  left: 91px;
+  top: 136px;
+  font-family: "Road Rage";
+  color: #ffe826;
+  text-decoration: none;
+}
+.linkRegHome {
+  z-index: 4;
+  display: flex;
+  position: absolute;
+  font-size: 15rem;
+  left: 91px;
+  top: 288px;
+  font-family: "Road Rage";
+  color: #ffe826;
+  text-decoration: none;
+}
+
+.logBack{
+  color: #fff;
+  z-index: 4;
+  display: flex;
+  position: absolute;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 66px;
+  line-height: 144px;
+  top: 747px;
+  left: -7px;
+}
+.RegBack{
+  color: #fff;
+  z-index: 4;
+  display: flex;
+  position: absolute;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 66px;
+  line-height: 144px;
+  top: 909px;
+  left: -6px;
 }

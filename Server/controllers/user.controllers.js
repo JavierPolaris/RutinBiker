@@ -224,6 +224,8 @@ const user = {
 
         try {
             const RutasPopulares = [];
+            const userRuta = [];
+            const RutasPopularesUSer = [];
             const rutas = await Ruta.findAll({
                 order: [
                     ['id', 'DESC']
@@ -231,13 +233,58 @@ const user = {
                 limit: 5
             });
             console.log("Las rutas mas populares");
-            console.log(rutas);
+            // console.log(rutas);
 
-            RutasPopulares.push(rutas);
             
+            rutas.map(
+                (elemento)=>{
+                    RutasPopulares.push(elemento.dataValues);
+                }
+            )
+          for (let i = 0; i < RutasPopulares.length; i++) {
+           const usuarioRuta = await UsuariosRutas.findOne({
+                where: {
+                    fk_id_ruta: RutasPopulares[i].id
+                }
+            });
+            userRuta.push(usuarioRuta.dataValues);  
+            
+          }
+        //   console.log("Esto usuarios rutas "+userRuta);
+            for (let i = 0; i < userRuta.length; i++) {
+          const userRutaTrack = await Usuario.findOne({
+                where: {
+                    id: userRuta[i].fk_id_usuario
+                }
+            });
+            RutasPopularesUSer.push(userRutaTrack.dataValues); 
+            }
+            const PopularUser = [];
+            for (let i = 0; i < RutasPopulares.length; i++) {
+                // console.log(RutasPopulares[i])
+                // console.log(RutasPopularesUSer[i]);
+                data = {
+                    nombreRuta: RutasPopulares[i].nombre,
+                    provincia: RutasPopulares[i].provincia,
+                    km: RutasPopulares[i].km,
+                    nombreUser: RutasPopularesUSer[i].nombre,
+                    urlImg: RutasPopularesUSer[i].urlImg,
+                }
+                PopularUser.push(data);
+
+            }
+
+
+
+
+            console.log(PopularUser);
+            const gilipollez = RutasPopulares + RutasPopularesUSer
+            // console.log(("gilipollez "+ gilipollez));
             res.json({
                 message: true,
-                rutas
+               PopularUser
+                // rutas,
+                // RutasPopularesUSer
             });
         } catch (error) {
             console.log("No hay rutas");
@@ -245,6 +292,7 @@ const user = {
                 message: false
             });
         }
+       
        
     }
 };

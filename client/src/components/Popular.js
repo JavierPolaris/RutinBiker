@@ -8,16 +8,16 @@ const Popular = () => {
 
 
 
-    const [UserPopular, setPopular] = useState([]);
-
-
+    const [RutaPopular, setPopular] = useState([]);
+    // const [UserPopular, setPopularUser] = useState([]);
 
     useEffect(() => {
 
         fetch('popular')
             .then(res => res.json())
             .then((res) => {
-                setPopular(res.rutas);
+                setPopular(res.PopularUser);
+                // setPopularUser(res.RutasPopularesUSer)
             }
             )
     }, [])
@@ -25,11 +25,14 @@ const Popular = () => {
 
 
 
-    console.log(UserPopular);
+    // console.log(UserPopular);
+    console.log(RutaPopular);
     return (
         <div className="fivePopular">
 
-            {UserPopular ? UserPopular.map((popular, i) => {
+            
+             
+            {RutaPopular ? RutaPopular.map((popular, i) => {
                 return (
                     <Card className="home-Popular-Block">
                         <Card className="home-Popular-text">
@@ -37,9 +40,11 @@ const Popular = () => {
                                 <h3 className='newPopu'>NEW</h3>
                                 <h3 className='newPopuRut'>TRACK</h3>
                             </Card>
+                            <img src={popular.urlImg} className="imagenTop5" />
                             <Card className="home-Popular-baner ">
+                               
                                 <Card className="home-Popular-banerRut">
-                                    <h1 className='nameRut'>{popular.nombre}</h1>
+                                    <h1 className='nameRut'>{popular.nombreUser}</h1>
                                     <h2 className='locationRut'>{popular.provincia}</h2>
                                 </Card>
                                 <Card className="home-historial-banerRutFlecha">
@@ -49,13 +54,14 @@ const Popular = () => {
                         </Card>
                     </Card>
                 )
-            }) : <h1>Loading...</h1>}
 
-                    </div>
+            }) : <h1>Loading...</h1>} 
+
+        </div>
 
 
 
-                )
-            }
+    )
+}
 
-                        export default Popular;
+export default Popular;

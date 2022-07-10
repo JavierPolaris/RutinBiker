@@ -27,11 +27,13 @@ id INT AUTO_INCREMENT,
 nombre VARCHAR(300) NOT NULL,
 provincia VARCHAR(300) NOT NULL,
 km VARCHAR(300),
+longitud VARCHAR(500) NOT NULL,
+latitud VARCHAR(500) NOT NULL,
 PRIMARY KEY(id)
 );
 
 
-INSERT INTO Rutas VALUES(null, "Cazorla", "Jaén", "330Km");
+INSERT INTO Rutas VALUES(null, "La Peza", "Granada", "110Km");
 
 SELECT * FROM Rutas;
 
@@ -49,5 +51,5 @@ FOREIGN KEY(fk_id_ruta) REFERENCES Rutas(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
-INSERT INTO Usuarios_Rutas VALUES(null, "2022-10-12", "2", "1");
+INSERT INTO Usuarios_Rutas VALUES(null, "2019-04-02", "2", "3");
 SELECT * FROM Usuarios_Rutas;
