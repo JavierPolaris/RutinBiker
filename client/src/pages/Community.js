@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import arbol from '../assets/img/arbol.png'
 import fondoImg from '../assets/img/backgroundLog.png'
 import Popular from '../components/Popular';
-import MapCommunity from '../components/MapCommunity';
+import Logo from '../assets/img/BikerRutin.png'
 import '../App.css';
+import MapView from "../components/MapView";
 
 const Community = () => {
 
@@ -27,7 +28,7 @@ const Community = () => {
                 backgroundRepeat: 'no-repeat',
                 backgroundBlendMode: 'color-burn',
                 mixBlendMode: 'overlay',
-                height: "100%",
+                height: "796px",
             }}>
                 <h1 style={{
                     color: 'yellow',
@@ -37,8 +38,12 @@ const Community = () => {
                 {<Popular />} 
             </div>
             </div>
+            
+                <img src={Logo} alt="logo" className="logo" />
+            
+           
             <div className="MapaCommunity">
-                    {/* {<MapCommunity />} */}
+               { <MapView />}
             </div>
 
         </div>

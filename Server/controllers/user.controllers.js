@@ -221,7 +221,7 @@ const user = {
 
      },
      popular: async(req, res) => {
-
+        
         try {
             const RutasPopulares = [];
             const userRuta = [];
