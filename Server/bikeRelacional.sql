@@ -15,6 +15,7 @@ longitud VARCHAR(500) NOT NULL,
 latitud VARCHAR(500) NOT NULL,
 modelo VARCHAR(300) NOT NULL,
 anio CHAR(4) NOT NULL,
+post VARCHAR(300) NOT NULL,
 PRIMARY KEY(id)
 );
 INSERT INTO Usuarios VALUES(null, "Miahi", "mihai@gmail.com", "http://c.files.bbci.co.uk/48DD/production/_107435681_perro1.jpg", "Miahi1234*", "motero", "32.30494", "-3.4938492", "Kawasaki", "2019");

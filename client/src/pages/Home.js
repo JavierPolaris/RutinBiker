@@ -41,12 +41,7 @@ const Home = () => {
       }
     });
   }
-  // document.addEventListener("onChange", () => {
-  //   let contenedor = document.querySelector('.contFoto');
-
-  //   carrusel(contenedor)
-  // })
-
+  
 
   return (
     <div className="home-conten">
@@ -66,19 +61,19 @@ const Home = () => {
         <div className='bannerHome'>
           <img src={banerHome} alt='banerHome' className='bannerHome' />
         </div>
-        <div className='noticias'>
+        {/* <div className='noticias'>
           <h1>Noticias</h1>
           <div className="homeNoticias-line"></div>
-        </div>
-        <div class="contFoto" onChange={carrusel()}>
-          <div class="atras botones">
+        </div> */}
+        {/* <div className="contFoto" onChange={carrusel()}>
+          <div className="atras botones">
             ⇠
           </div>
-          <div class="adelante botones">
+          <div className="adelante botones">
             ⇢
           </div>
-          <img src="https://s3.eu-west-1.amazonaws.com/cdn.motorbikemag.es/wp-content/uploads/2022/03/puntapunta-2022.png" width="100%" height="350px" alt="" class="imgBaner" />
-        </div>
+          <img src="https://s3.eu-west-1.amazonaws.com/cdn.motorbikemag.es/wp-content/uploads/2022/03/puntapunta-2022.png" width="100%" height="350px" alt="" className="imgBaner" />
+        </div> */}
       </div>
     </div >
 

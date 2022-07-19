@@ -6,7 +6,8 @@
  /* const password = process.env.mPassword;
  const dblocalM = process.env.mdblocalM */
  
- const connectionS = `mongodb://127.0.0.1:27017/test`;
+ const connectionS = `mongodb://127.0.0.1:27017/BikeRoutes
+ `;
  /* const connectionL = process.env.projectMoviesDB */
  
  mongoose

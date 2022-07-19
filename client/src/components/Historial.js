@@ -28,7 +28,7 @@ const Historial = () => {
                 .then(res => res.json())
                 .then((res) => {
                     setHistorial(res.rutasUser);
-                    console.log(res.rutasUser);
+                    // console.log(res.rutasUser);
                     
                 }
                 )
@@ -42,13 +42,13 @@ const Historial = () => {
  
 
 
-console.log(UserHistorial);
+// console.log(UserHistorial);
     return (
       <div className="historial">
 
         {UserHistorial ? UserHistorial.map((historial,i) => {
 
-              console.log(historial);
+            //   console.log(historial);
 
  
                 return (

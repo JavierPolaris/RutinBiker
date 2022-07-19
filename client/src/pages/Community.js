@@ -5,7 +5,7 @@ import Popular from '../components/Popular';
 import Logo from '../assets/img/BikerRutin.png'
 import '../App.css';
 import MapView from "../components/MapView";
-
+import FeddCommunity from '../components/feedCommunity/feedCommunity';
 const Community = () => {
 
     return (
@@ -20,30 +20,35 @@ const Community = () => {
             flexDirection: "column",
             alignItems: "center",
         }} className="home">
-            <div className="mostPopular-conten">
-            <div className="mostPopular" style={{
-                backgroundImage: `url(${arbol})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                backgroundBlendMode: 'color-burn',
-                mixBlendMode: 'overlay',
-                height: "796px",
-            }}>
-                <h1 style={{
-                    color: 'yellow',
-                    }}>Last Rute</h1>
-                <div className="mostPopular-line"></div>
+            <div className="homeEngloba">
+                <div className="mostPopular-conten">
+                    <div className="mostPopular" style={{
+                        backgroundImage: `url(${arbol})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundBlendMode: 'color-burn',
+                        mixBlendMode: 'overlay',
+                        height: "796px",
+                    }}>
+                        <h1 style={{
+                            color: 'yellow',
+                        }}>Amigos <br></br>Conectados </h1>
+                        <div className="mostPopular-line"></div>
 
-                {<Popular />} 
-            </div>
-            </div>
-            
-                <img src={Logo} alt="logo" className="logo" />
-            
-           
-            <div className="MapaCommunity">
-               { <MapView />}
+                        {<Popular />}
+                    </div>
+                </div>
+                <div className="feed-community">
+                    <FeddCommunity />
+                    <img src={Logo} alt="logo" className="logo" />
+                
+                </div>
+               
+
+                <div className="MapaCommunity">
+                    {<MapView />}
+                </div>
             </div>
 
         </div>
