@@ -572,12 +572,13 @@ const user = {
             });
     },
     searchUser: async (req, res) => {
-        const { usermail } = req.body;
-       
-       
+        const { userName } = req.body;
+       console.log(userName);
+      
+        try {
             const user = await Usuario.findOne({
                 where: {
-                    email: usermail
+                    nombre: userName
                 }
             });
             console.log(user);
@@ -585,7 +586,15 @@ const user = {
                 message: true,
                 user
             });
-        
+        }
+        catch (error) {
+            console.log(error);
+            res.json({
+                message: false
+            });
+        }
+    
+           
 
     }
 };
