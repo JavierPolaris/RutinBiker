@@ -9,12 +9,12 @@ const Historial = () => {
     
     
     
-    const [UserHistorial, setHistorial] = useState([]);
+    const [UserHistorial, setHistorial] = useState([]);  //variable para guardar el historial de usuario es un estado de react
     
     
     
     
-    useEffect(() => {
+    useEffect(() => {  //useEffect para obtener los datos del historial del usuario es un Hook de React
         
             const requestOptions = {
                 method: 'POST',

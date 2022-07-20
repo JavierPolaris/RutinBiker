@@ -36,11 +36,6 @@ export default function Post({ post }) {
   }
 
 
-
-
-
-
-
   const likeHandler = (id) => {
     const requestOptions = {
       method: 'POST',
@@ -50,7 +45,7 @@ export default function Post({ post }) {
         id,
       }),
     };
-    // console.log(requestOptions);
+   ;
 
 
     fetch("like", requestOptions)

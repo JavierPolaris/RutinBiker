@@ -64,7 +64,7 @@ console.log(aviso)
                     </div>
                 </nav> : <nav class="navbar">
                     <div class="navbar-sing">
-                        <input type="text" placeholder="Search" className="search" />
+                       
                         <Link to={"/login"} className="buttonLog">Log in </Link>
                         <Link to={"/singUp"} className="buttonReg">Sing up</Link>
                     </div>

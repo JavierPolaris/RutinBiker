@@ -112,8 +112,50 @@ body {
   position: relative;
 
 }
+.login-Img2 {
+  width: 858px;
+  height: 758px;
+  overflow: hidden;
+  /* margin: 10px; */
+  position: relative;
+  left: 258px;
+  top: -115px;
+
+}
+.login-Im3 {
+  width: 858px;
+  height: 758px;
+  overflow: hidden;
+  /* margin: 10px; */
+  position: relative;
+  left: 258px;
+  top: -226px;
+
+}
 
 .login-Img>.loginImg {
+  display: flex;
+  position: absolute;
+  left: -150%;
+  right: -100%;
+  top: -100%;
+  bottom: -100%;
+  margin: auto;
+  min-height: 100%;
+  min-width: 100%;
+}
+.login-Img2>.loginImg {
+  display: flex;
+  position: absolute;
+  left: -150%;
+  right: -100%;
+  top: -100%;
+  bottom: -100%;
+  margin: auto;
+  min-height: 100%;
+  min-width: 100%;
+}
+.login-Im3>.loginImg {
   display: flex;
   position: absolute;
   left: -150%;
@@ -1083,4 +1125,54 @@ body {
   border-radius: 20px;
   height: 25px;
   color: #4f4f4f;
+}
+.aviso{
+  position: relative;
+    top: 154px;
+    left: 87px;
+    font-size: 40px;
+}
+.boinputsLog{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  
+}
+.boinputsLog2{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  top: -112px;
+}
+.boinputsLog1{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  top: -112px;
+  left: 79px;
+}
+
+.form-label{
+  font-size: 35px;
+  color: gray;
+}
+.form-control{
+  border-radius: 20px;
+  border: 1px solid gray;
+  width: 293px;
+  margin-top: 20px;
+}
+.btn-primary{
+  border: none;
+  background-color: #ffeb3b;
+  height: 42px;
+  border-radius: 33px;
+  color: #444444;
+  margin-top: 29px;
+}
+.Recupe{
+  font-size: 50px;
 }

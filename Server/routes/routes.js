@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const pages = require("../controllers/pages.controllers")
 const user = require("../controllers/user.controllers")
+const passRecovery = require("../controllers/passRecovery")
 
 
 //Rutas de inicio
@@ -22,6 +23,9 @@ router.post("/love", user.love);
 router.post("/addImg", user.addImg);
 router.post("/userFanpage", user.userFanpage);
 router.post("/searchUser", user.searchUser);
+router.post('/pwrecover', passRecovery.confirmedUser);
+router.get('/pwrecoverReset/:email/:token', passRecovery.confirmUserGet);
+router.post('/pwrecoverReset/:email/:token', passRecovery.checkUserPost);
 
 
 

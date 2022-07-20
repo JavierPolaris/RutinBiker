@@ -89,6 +89,8 @@ const Login = () => {
 
                         </ul>
                     </div>
+                    <h2 className='retPass'>Has olvidado tu <a href="/pwrecover">contraseña?</a></h2>
+
                 </div>
                 <div className="login-Text">
 

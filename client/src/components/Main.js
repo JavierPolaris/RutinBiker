@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom"; //importamos las rutas de react-router-dom para el Routing
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Registro from "../pages/Registro";
@@ -7,7 +7,8 @@ import UPage from "../pages/UPage";
 import Community from "../pages/Community";
 import RecRute from "../pages/RecRute";
 import PaginaUsuarios from "../pages/paginaUsuarios";
-
+import PWRecover from "../pages/PWRecovery";
+import PWRecoverReset from "../pages/PWRecoveryReset";
 
 
 
@@ -18,6 +19,8 @@ class Main extends Component {
         return (
         <div>
             <Routes>
+                <Route path="/pwrecover" element={<PWRecover />} />
+                <Route path="/pwrecoverReset/:email/:token" element={<PWRecoverReset />} />
                 <Route path="/home" exact element={<Home />} />
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />

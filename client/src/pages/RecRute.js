@@ -14,8 +14,6 @@ class recMap extends React.Component {
    
     componentDidMount() {
         
-    
-
        navigator.geolocation.getCurrentPosition((pos) => {
         this.setState({
             latitude: pos.coords.latitude,

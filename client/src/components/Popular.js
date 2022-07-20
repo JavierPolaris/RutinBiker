@@ -10,7 +10,7 @@ const Popular = () => {
 
 
     const [RutaPopular, setPopular] = useState([]);
-    // const [UserPopular, setPopularUser] = useState([]);
+   
 
     useEffect(() => {
 
@@ -18,16 +18,12 @@ const Popular = () => {
             .then(res => res.json())
             .then((res) => {
                 setPopular(res.PopularUser);
-                // setPopularUser(res.RutasPopularesUSer)
+               
             }
             )
     }, [])
 
 
-
-
-    // console.log(UserPopular);
-    // console.log(RutaPopular);
     return (
         <div className="fivePopular">
           <>
